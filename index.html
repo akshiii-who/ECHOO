@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Echo — Every story has another side.</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Georgia,"Times New Roman",serif;
+  background:#f7f4ef;
+  color:#29272b;
+  line-height:1.65
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+:root{
+  --bg:#f7f4ef;
+  --paper:#fffdf9;
+  --ink:#29272b;
+  --muted:#77727b;
+  --line:#ded9d2;
+  --lav:#76678d;
+  --lav-light:#eee9f2;
+}
+
+nav{
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  border-bottom:1px solid var(--line);
+  background:rgba(247,244,239,.95);
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.logo{
+  font-size:27px;
+  letter-spacing:.08em;
+  font-weight:bold
+}
+.navlinks{
+  display:flex;
+  gap:28px;
+  align-items:center;
+  font-family:Arial,sans-serif;
+  font-size:14px
+}
+.navlinks a:hover{color:var(--lav)}
+.navbtn{
+  border:1px solid var(--ink);
+  background:transparent;
+  padding:9px 17px;
+  border-radius:3px
+}
+.navbtn:hover{
+  background:var(--ink);
+  color:white
+}
+
+.hero{
+  min-height:680px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:70px;
+  max-width:1200px;
+  margin:auto;
+  padding:90px 7%
+}
+.kicker{
+  color:var(--lav);
+  font:12px Arial,sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin-bottom:18px
+}
+h1{
+  font-size:clamp(48px,7vw,86px);
+  line-height:1.02;
+  font-weight:normal;
+  letter-spacing:-.04em
+}
+.hero p{
+  color:var(--muted);
+  max-width:530px;
+  font-size:18px;
+  margin:28px 0
+}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.primary{
+  background:var(--ink);
+  color:white;
+  border:1px solid var(--ink);
+  padding:13px 22px;
+  border-radius:3px
+}
+.secondary{
+  background:transparent;
+  border:1px solid var(--line);
+  padding:13px 22px;
+  border-radius:3px
+}
+.primary:hover{background:var(--lav);border-color:var(--lav)}
+.secondary:hover{border-color:var(--lav);color:var(--lav)}
+
+.echo-art{
+  position:relative;
+  height:390px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+.fragment{
+  position:absolute;
+  width:260px;
+  height:190px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  padding:30px;
+  box-shadow:0 15px 45px rgba(30,25,35,.06)
+}
+.fragment:first-child{
+  transform:translate(-80px,-45px) rotate(-5deg)
+}
+.fragment:last-child{
+  transform:translate(80px,45px) rotate(5deg)
+}
+.fragment small{
+  color:var(--lav);
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:.1em
+}
+.fragment div{
+  margin-top:22px;
+  font-size:20px
+}
+.bridge{
+  width:110px;
+  height:1px;
+  background:var(--lav);
+  position:absolute;
+  transform:rotate(25deg)
+}
+
+section{
+  padding:95px 7%;
+  max-width:1200px;
+  margin:auto
+}
+.section-head{
+  max-width:700px;
+  margin-bottom:48px
+}
+.section-head h2{
+  font-size:44px;
+  font-weight:normal;
+  line-height:1.15;
+  margin-bottom:14px
+}
+.section-head p{color:var(--muted)}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line)
+}
+.step{
+  padding:30px 25px 30px 0;
+  border-right:1px solid var(--line);
+  margin-right:25px
+}
+.step:last-child{border:0}
+.num{
+  color:var(--lav);
+  font:12px Arial,sans-serif;
+  letter-spacing:.1em
+}
+.step h3{font-size:21px;margin:15px 0 8px}
+.step p{color:var(--muted);font-size:14px}
+
+.discover{
+  background:#eeebe6;
+  max-width:none;
+  padding-left:calc((100% - 1200px)/2 + 7%);
+  padding-right:calc((100% - 1200px)/2 + 7%)
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px
+}
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:28px;
+  min-height:240px;
+  transition:.2s
+}
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 35px rgba(0,0,0,.06)
+}
+.tag{
+  display:inline-block;
+  color:var(--lav);
+  background:var(--lav-light);
+  padding:4px 9px;
+  font:11px Arial,sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase
+}
+.card h3{font-size:25px;font-weight:normal;margin:18px 0 9px}
+.card p{color:var(--muted);font-size:15px}
+.meta{
+  margin-top:20px;
+  font:12px Arial,sans-serif;
+  color:#918b92
+}
+
+.form-wrap{
+  max-width:760px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:40px
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px
+}
+.field{margin-bottom:18px}
+.field.full{grid-column:1/-1}
+label{
+  display:block;
+  font:12px Arial,sans-serif;
+  letter-spacing:.06em;
+  margin-bottom:7px;
+  color:#625e65
+}
+input,textarea,select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  padding:12px 13px;
+  color:var(--ink);
+  outline:none;
+  border-radius:2px
+}
+textarea{min-height:150px;resize:vertical}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--lav)
+}
+.notice{
+  background:var(--lav-light);
+  padding:15px;
+  font:13px Arial,sans-serif;
+  color:#5e5767;
+  margin-bottom:25px
+}
+
+.about{
+  border-top:1px solid var(--line);
+  text-align:center;
+  max-width:none
+}
+.about p{
+  max-width:650px;
+  margin:20px auto;
+  color:var(--muted);
+  font-size:18px
+}
+
+footer{
+  border-top:1px solid var(--line);
+  padding:35px 7%;
+  color:var(--muted);
+  font:12px Arial,sans-serif;
+  text-align:center
+}
+
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(30,25,35,.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  padding:20px
+}
+.modal{
+  width:min(480px,100%);
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:35px
+}
+.modal h2{
+  font-size:30px;
+  font-weight:normal;
+  margin-bottom:20px
+}
+.close{
+  float:right;
+  background:none;
+  border:0;
+  font-size:24px
+}
+.modal .field{margin-bottom:15px}
+.error{
+  color:#9a4d55;
+  font:13px Arial,sans-serif;
+  margin-bottom:12px
+}
+.success{
+  color:#58705d;
+  font:13px Arial,sans-serif;
+  margin-bottom:12px
+}
+
+.dashboard{
+  display:none;
+  background:#f0ede8;
+  max-width:none
+}
+.dashboard-inner{
+  max-width:1200px;
+  margin:auto
+}
+.dash-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px
+}
+.stat{
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:25px
+}
+.stat strong{
+  display:block;
+  font-size:34px;
+  font-weight:normal
+}
+.stat span{
+  color:var(--muted);
+  font:12px Arial,sans-serif
+}
+
+@media(max-width:800px){
+  nav{padding:0 5%}
+  .navlinks a:not(.navbtn){display:none}
+  .hero{
+    grid-template-columns:1fr;
+    padding:70px 6%;
+    min-height:auto
+  }
+  .echo-art{height:300px}
+  .fragment{width:210px;height:160px;padding:22px}
+  .fragment:first-child{transform:translate(-45px,-35px) rotate(-5deg)}
+  .fragment:last-child{transform:translate(45px,35px) rotate(5deg)}
+  .steps,.cards,.dash-grid{grid-template-columns:1fr}
+  section{padding:70px 6%}
+  .discover{padding:70px 6%}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .form-wrap{padding:25px}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="#top" class="logo">Echo</a>
+
+  <div class="navlinks">
+    <a href="#discover">Discover</a>
+    <a href="#share">Share a Memory</a>
+    <a href="#how">How It Works</a>
+    <a href="#about">About</a>
+    <button class="navbtn" onclick="openAuth()">Sign in</button>
+  </div>
+</nav>
+
+<main id="top">
+
+<section class="hero">
+  <div>
+    <div class="kicker">For the stories that never got an ending</div>
+
+    <h1>Every story has another side.</h1>
+
+    <p>
+      Some memories stay with us because we never learned
+      what they meant to someone else. Echo helps people
+      discover whether someone else remembers the same moment.
+    </p>
+
+    <div class="actions">
+      <button class="primary" onclick="goShare()">
+        Share your story
+      </button>
+
+      <button class="secondary" onclick="goDiscover()">
+        Explore memories
+      </button>
+    </div>
+  </div>
+
+  <div class="echo-art">
+    <div class="fragment">
+      <small>YOUR MEMORY</small>
+      <div>
+        "I still wonder if they remember."
+      </div>
+    </div>
+
+    <div class="bridge"></div>
+
+    <div class="fragment">
+      <small>ANOTHER SIDE</small>
+      <div>
+        "I thought I was the only one."
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="section-head">
+    <div class="kicker">How it works</div>
+    <h2>Quietly. Carefully. On your terms.</h2>
+    <p>
+      Echo never assumes that finding someone means
+      reconnecting with them.
+    </p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <h3>Tell your side</h3>
+      <p>
+        Write about a memory, friendship, encounter,
+        falling-out, or connection that stayed with you.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="num">02</div>
+      <h3>Leave an echo</h3>
+      <p>
+        Your memory enters Echo without making your
+        identity publicly searchable.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="num">03</div>
+      <h3>Find the other side</h3>
+      <p>
+        Echo looks for another memory with meaningful
+        similarities.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="num">04</div>
+      <h3>Choose what happens</h3>
+      <p>
+        Ask anonymously, exchange perspectives,
+        talk, reveal identities mutually, or leave it here.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="discover" class="discover">
+  <div class="section-head">
+    <div class="kicker">Discover</div>
+    <h2>Memories looking for their other side.</h2>
+    <p>
+      These are fictional demonstration memories.
+      Real identities are never exposed just because memories match.
+    </p>
+  </div>
+
+  <div id="memoryCards" class="cards"></div>
+</section>
+
+<section id="share">
+  <div class="section-head">
+    <div class="kicker">Share a memory</div>
+    <h2>Tell it from where you stood.</h2>
+    <p>
+      You don't need to know who the other person is.
+      You only need to remember what happened.
+    </p>
+  </div>
+
+  <div class="form-wrap">
+
+    <div class="notice">
+      <strong>Privacy first.</strong><br>
+      Don't include real addresses, phone numbers,
+      email addresses, passwords, or other sensitive
+      personal information. A match will never reveal
+      someone's identity automatically.
+    </div>
+
+    <div id="memoryMessage"></div>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>DISPLAY NAME / PSEUDONYM</label>
+        <input id="mName" placeholder="e.g. Moonlight">
+      </div>
+
+      <div class="field">
+        <label>CATEGORY</label>
+        <select id="mCategory">
+          <option value="">Choose one</option>
+          <option>Friendship</option>
+          <option>School</option>
+          <option>Childhood</option>
+          <option>Family</option>
+          <option>Lost Connection</option>
+          <option>Falling Out</option>
+          <option>Travel</option>
+          <option>Important Encounter</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>APPROXIMATE YEAR</label>
+        <input id="mYear" placeholder="e.g. 2021">
+      </div>
+
+      <div class="field">
+        <label>APPROXIMATE LOCATION</label>
+        <input id="mLocation" placeholder="e.g. School">
+      </div>
+
+      <div class="field">
+        <label>RELATIONSHIP</label>
+        <input id="mRelationship" placeholder="e.g. Friend">
+      </div>
+
+      <div class="field">
+        <label>OPTIONAL NICKNAME / INITIALS</label>
+        <input id="mNickname" placeholder="Optional">
+      </div>
+
+      <div class="field full">
+        <label>TITLE</label>
+        <input id="mTitle" placeholder="Give this memory a name">
+      </div>
+
+      <div class="field full">
+        <label>TELL YOUR SIDE</label>
+        <textarea id="mContent" placeholder="What happened? What do you remember?"></textarea>
+      </div>
+
+      <div class="field full">
+        <label>WHAT DO YOU STILL WONDER?</label>
+        <textarea id="mQuestion" style="min-height:100px" placeholder="The question that never got answered..."></textarea>
+      </div>
+
+    </div>
+
+    <button class="primary" onclick="submitMemory()">
+      Leave your echo
+    </button>
+
+  </div>
+</section>
+
+<section id="dashboard" class="dashboard">
+  <div class="dashboard-inner">
+    <div class="section-head">
+      <div class="kicker">Your Echo</div>
+      <h2>Your memories, privately.</h2>
+    </div>
+
+    <div id="dashStats" class="dash-grid"></div>
+
+    <div style="margin-top:25px">
+      <button class="secondary" onclick="logout()">Sign out</button>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="kicker">About Echo</div>
+
+  <h2>Sometimes people don't need to reconnect.</h2>
+
+  <p>
+    Sometimes they just want to know that the other person
+    remembers. Echo exists for the stories that ended
+    without an ending.
+  </p>
+
+  <p>
+    <em>
+      Maybe someone else remembers what you remember.
+    </em>
+  </p>
+</section>
+
+</main>
+
+<footer>
+  Echo · A prototype for unresolved connections
+</footer>
+
+<!-- AUTH MODAL -->
+
+<div id="authBg" class="modal-bg">
+  <div class="modal">
+
+    <button class="close" onclick="closeAuth()">×</button>
+
+    <h2 id="authTitle">Sign in</h2>
+
+    <div id="authMessage"></div>
+
+    <div id="registerNameField" class="field" style="display:none">
+      <label>NAME / PSEUDONYM</label>
+      <input id="authName" placeholder="What should Echo call you?">
+    </div>
+
+    <div class="field">
+      <label>EMAIL</label>
+      <input id="authEmail" type="email" placeholder="you@example.com">
+    </div>
+
+    <div class="field">
+      <label>PASSWORD</label>
+      <input id="authPassword" type="password" placeholder="At least 8 characters">
+    </div>
+
+    <button class="primary" style="width:100%" onclick="submitAuth()">
+      Continue
+    </button>
+
+    <button
+      id="authSwitch"
+      class="secondary"
+      style="width:100%;margin-top:10px"
+      onclick="switchAuth()">
+      Create an account instead
+    </button>
+
+  </div>
+</div>
+
+<script>
+let currentUser = null;
+let authMode = 'login';
+
+function $(id){
+  return document.getElementById(id);
+}
+
+function goShare(){
+  $('share').scrollIntoView({behavior:'smooth'});
+}
+
+function goDiscover(){
+  $('discover').scrollIntoView({behavior:'smooth'});
+}
+
+function openAuth(){
+  $('authBg').style.display='flex';
+  $('authMessage').innerHTML='';
+}
+
+function closeAuth(){
+  $('authBg').style.display='none';
+}
+
+function switchAuth(){
+  authMode =
+    authMode === 'login'
+      ? 'register'
+      : 'login';
+
+  $('authTitle').textContent =
+    authMode === 'login'
+      ? 'Sign in'
+      : 'Create your Echo';
+
+  $('registerNameField').style.display =
+    authMode === 'register'
+      ? 'block'
+      : 'none';
+
+  $('authSwitch').textContent =
+    authMode === 'login'
+      ? 'Create an account instead'
+      : 'I already have an account';
+
+  $('authMessage').innerHTML='';
+}
+
+async function api(url,options={}){
+  const response = await fetch(
+    url,
+    {
+      credentials:'include',
+      headers:{
+        'Content-Type':'application/json',
+        ...(options.headers||{})
+      },
+      ...options
+    }
+  );
+
+  const data = await response.json();
+
+  if(!response.ok){
+    throw new Error(
+      data.error || 'Something went wrong.'
+    );
+  }
+
+  return data;
+}
+
+async function submitAuth(){
+
+  const email =
+    $('authEmail').value.trim();
+
+  const password =
+    $('authPassword').value;
+
+  const name =
+    $('authName').value.trim();
+
+  if(
+    authMode === 'register' &&
+    !name
+  ){
+    $('authMessage').innerHTML =
+      '<div class="error">Please enter a name or pseudonym.</div>';
+    return;
+  }
+
+  try{
+
+    const data =
+      await api(
+        authMode === 'login'
+          ? '/api/auth/login'
+          : '/api/auth/register',
+        {
+          method:'POST',
+          body:JSON.stringify(
+            authMode === 'login'
+              ? {email,password}
+              : {name,email,password}
+          )
+        }
+      );
+
+    currentUser = data.user;
+
+    closeAuth();
+
+    showDashboard();
+
+  }catch(e){
+
+    $('authMessage').innerHTML =
+      '<div class="error">'+
+      escapeHtml(e.message)+
+      '</div>';
+  }
+}
+
+async function checkUser(){
+
+  try{
+
+    const data =
+      await api('/api/auth/me');
+
+    currentUser = data.user;
+
+    if(currentUser){
+      showDashboard();
+    }
+
+  }catch(e){}
+}
+
+async function loadMemories(){
+
+  try{
+
+    const data =
+      await api('/api/memories');
+
+    renderMemories(
+      data.memories || []
+    );
+
+  }catch(e){
+
+    $('memoryCards').innerHTML =
+      '<div class="card">Unable to load memories.</div>';
+  }
+}
+
+function renderMemories(memories){
+
+  if(!memories.length){
+
+    $('memoryCards').innerHTML =
+      '<div class="card">No memories yet.</div>';
+
+    return;
+  }
+
+  $('memoryCards').innerHTML =
+    memories.map(m => `
+
+      <article class="card">
+
+        <span class="tag">
+          ${escapeHtml(m.category || 'Memory')}
+        </span>
+
+        <h3>
+          ${escapeHtml(m.title)}
+        </h3>
+
+        <p>
+          ${escapeHtml(m.content)}
+        </p>
+
+        <div class="meta">
+          ${escapeHtml(m.year || 'Unknown year')}
+          ·
+          ${escapeHtml(m.location || 'Unknown place')}
+          ·
+          ${escapeHtml(m.name || 'Anonymous')}
+        </div>
+
+      </article>
+
+    `).join('');
+}
+
+async function submitMemory(){
+
+  if(!currentUser){
+
+    openAuth();
+
+    $('authMessage').innerHTML =
+      '<div class="error">Create an account or sign in before leaving your echo.</div>';
+
+    return;
+  }
+
+  const payload = {
+
+    name:$('mName').value.trim(),
+
+    category:$('mCategory').value,
+
+    year:$('mYear').value.trim(),
+
+    location:$('mLocation').value.trim(),
+
+    relationship:$('mRelationship').value.trim(),
+
+    nickname:$('mNickname').value.trim(),
+
+    title:$('mTitle').value.trim(),
+
+    content:$('mContent').value.trim(),
+
+    question:$('mQuestion').value.trim()
+
+  };
+
+  if(
+    !payload.category ||
+    !payload.title ||
+    !payload.content
+  ){
+
+    $('memoryMessage').innerHTML =
+      '<div class="error">Category, title and your story are required.</div>';
+
+    return;
+  }
+
+  try{
+
+    await api(
+      '/api/memories',
+      {
+        method:'POST',
+        body:JSON.stringify(payload)
+      }
+    );
+
+    $('memoryMessage').innerHTML =
+      '<div class="success">Your memory has been added to Echo.</div>';
+
+    [
+      'mName',
+      'mYear',
+      'mLocation',
+      'mRelationship',
+      'mNickname',
+      'mTitle',
+      'mContent',
+      'mQuestion'
+    ].forEach(id => $(id).value='');
+
+    $('mCategory').value='';
+
+    loadMemories();
+
+    setTimeout(
+      () =>
+        $('memoryMessage').innerHTML='',
+      4000
+    );
+
+  }catch(e){
+
+    $('memoryMessage').innerHTML =
+      '<div class="error">'+
+      escapeHtml(e.message)+
+      '</div>';
+  }
+}
+
+async function showDashboard(){
+
+  if(!currentUser) return;
+
+  $('dashboard').style.display='block';
+
+  try{
+
+    const data =
+      await api('/api/dashboard');
+
+    const memoryCount =
+      data.memories?.length || 0;
+
+    const matchCount =
+      data.matches?.length || 0;
+
+    const verified =
+      (data.matches || [])
+        .filter(m => m.status === 'verified')
+        .length;
+
+    $('dashStats').innerHTML = `
+
+      <div class="stat">
+        <strong>${memoryCount}</strong>
+        <span>MEMORIES</span>
+      </div>
+
+      <div class="stat">
+        <strong>${matchCount}</strong>
+        <span>POTENTIAL ECHOES</span>
+      </div>
+
+      <div class="stat">
+        <strong>${verified}</strong>
+        <span>VERIFIED MATCHES</span>
+      </div>
+
+    `;
+
+  }catch(e){}
+}
+
+async function logout(){
+
+  try{
+    await api(
+      '/api/auth/logout',
+      {method:'POST'}
+    );
+  }catch(e){}
+
+  currentUser=null;
+
+  $('dashboard').style.display='none';
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+}
+
+function escapeHtml(value){
+
+  return String(value ?? '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
+
+loadMemories();
+checkUser();
+</script>
+
+</body>
+</html>

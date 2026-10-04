@@ -1,0 +1,12 @@
+{
+  "name": "echo",
+  "version": "1.0.0",
+  "description": "Echo - Every story has another side.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
